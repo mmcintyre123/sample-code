@@ -13,4 +13,6 @@ if (process.env.DEV) {
 
   exports.iosWebviewAppLocal = "http://localhost:3000/WebViewApp7.1.app.zip";
   exports.androidApiDemosLocal = "http://localhost:3000/ApiDemos-debug.apk";
+  exports.i360Walk = "https://www.seisan.us/clients/i360/walk/i360Walk.apk"
+  
 }
