@@ -56,8 +56,37 @@ describe("android local server", function () {
 
   it("should open the app", function () {
     return driver
-      .getElementByID('btnLogin')
-      .click();
+      .elementById('com.i360.i360Walk:id/etLoginUsername')
+        .sendKeys('test_1654wseward')
+      .elementById('com.i360.i360Walk:id/etPassword')
+        .sendKeys('asdf')
+      .elementById('com.i360.i360Walk:id/btnLogin')
+        .click()
+      .sleep(4000)
+  });
+
+  it("should open Walkbooks", function() {
+    return driver
+      .elementByName('Walkbooks')
+        .click()
+      .sleep(4000)
+      .elementByName('and another one')
+        .click()
+      .elementByName('Preview Survey Questions')
+        .click()
+      .sleep(1000)
+      .back()
+      .elementByName('Start')
+        .click()
+      .sleep(2000)
+      // .waitForElementByName('Select Walkbook')
+      .elementByXPath("//android.widget.TextView[@text='List']")
+        .click()
+      .waitForElementById('com.i360.i360Walk:id/line1')
+      .text().should.eventually.include('Walkbook 28')
+      .elementByName('Walkbook 28')
+        .click()
+      .sleep(4000)
   });
 
 });
