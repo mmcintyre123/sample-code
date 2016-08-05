@@ -17,7 +17,7 @@ var    localServer = require('./helpers/local-server');
 
 
 describe("android local server", function () {
-  this.timeout(300000);
+  this.timeout(30000);
   var driver;
   var allPassed = true;
 
@@ -48,11 +48,11 @@ describe("android local server", function () {
         }
       });
   });
-
+/*
   afterEach(function () {
     allPassed = allPassed && this.currentTest.state === 'passed';
   });
-
+*/
 
   it("should open the app", function () {
     return driver
