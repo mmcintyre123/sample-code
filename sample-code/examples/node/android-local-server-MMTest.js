@@ -48,11 +48,11 @@ describe("android local server", function () {
         }
       });
   });
-/*
+
   afterEach(function () {
     allPassed = allPassed && this.currentTest.state === 'passed';
   });
-*/
+
 
   it("should open the app", function () {
     return driver
@@ -62,19 +62,22 @@ describe("android local server", function () {
         .sendKeys('asdf')
       .elementById('com.i360.i360Walk:id/btnLogin')
         .click()
-      .sleep(4000)
+      .waitForElementByName('Walkbooks');
+      done();
   });
 
   it("should open Walkbooks", function() {
     return driver
       .elementByName('Walkbooks')
         .click()
-      .sleep(4000)
+      .waitForElementByName('and another one')
       .elementByName('and another one')
         .click()
       .elementByName('Preview Survey Questions')
         .click()
-      .sleep(1000)
+      .source().then(function (source) {
+        source.should.include('Question 1');
+      })
       .back()
       .elementByName('Start')
         .click()
@@ -85,7 +88,7 @@ describe("android local server", function () {
       .text().should.eventually.include('Walkbook 28')
       .elementByName('Walkbook 28')
         .click()
-      .sleep(4000)
+      done();
   });
 
 });
