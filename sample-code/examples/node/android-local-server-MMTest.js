@@ -72,12 +72,25 @@ describe("android local server", function () {
         .click()
       .waitForElementByName('and another one')
       .elementByName('and another one')
-        .click()
+        .click();
+
+      // Survey Preview Validations
+
+    var previewSource;
+    return driver
+
       .elementByName('Preview Survey Questions')
         .click()
       .source().then(function (source) {
-        source.should.include('Question 1');
+        previewSource = source;
+        previewSource.should.include('and another one'); // survey title
+        previewSource.should.include('Question 1');
+        previewSource.should.include('Answer 1');
+        previewSource.should.include('Answer 2');
       })
+
+      // Select a walkbook, list view, make assertions
+
       .back()
       .elementByName('Start')
         .click()
@@ -88,6 +101,26 @@ describe("android local server", function () {
       .text().should.eventually.include('Walkbook 28')
       .elementByName('Walkbook 28')
         .click()
+      .elementByXPath("//android.widget.TextView[@text='List']")
+        .click()
+      .waitForElementById('com.i360.i360Walk:id/line1')
+      .text().should.eventually.include('Burnette')
+
+      // Select a house & assertions
+      .elementByName('Heath')
+        .click()
+        //assertions
+
+        
+      // select a target & assertions
+      .elementByName('Cassidy Heath')
+        .click()
+        //assertions
+
+      // take survey
+      .elementByName('Take Survey')
+
+
       done();
   });
 
