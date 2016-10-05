@@ -63,21 +63,18 @@ describe("android local server", function () {
       .elementById('com.i360.i360Walk:id/btnLogin')
         .click()
       .waitForElementByName('Walkbooks');
-      done();
   });
 
-  it("should open Walkbooks", function() {
-    return driver
-      .elementByName('Walkbooks')
-        .click()
-      .waitForElementByName('and another one')
-      .elementByName('and another one')
-        .click();
-
-      // Survey Preview Validations
-
+  it("should open Walkbooks and Preview the Survey", function() {
     var previewSource;
     return driver
+      .elementByName('Walkbooks')
+        .click().sleep(1000)
+      .waitForElementByName('and another one')
+      .elementByName('and another one')
+        .click()
+
+      // Survey Preview Validations
 
       .elementByName('Preview Survey Questions')
         .click()
@@ -88,40 +85,55 @@ describe("android local server", function () {
         previewSource.should.include('Answer 1');
         previewSource.should.include('Answer 2');
       })
+    });    
 
+  it('should select a walkbook, household, target, and take a survey', function () {
+    return driver
       // Select a walkbook, list view, make assertions
-
       .back()
       .elementByName('Start')
         .click()
       .waitForElementByName('Select Walkbook')
       .elementByXPath("//android.widget.TextView[@text='List']")
         .click()
-      .waitForElementById('com.i360.i360Walk:id/line1')
-      .text().should.eventually.include('Walkbook 28')
+      .waitForElementByName('Walkbook 28')
       .elementByName('Walkbook 28')
         .click()
+      .waitForElementByName('Houses in Walkbook 28')
       .elementByXPath("//android.widget.TextView[@text='List']")
         .click()
-      .waitForElementById('com.i360.i360Walk:id/line1')
-      .text().should.eventually.include('Burnette')
 
       // Select a house & assertions
-      .elementByName('Heath')
+      
+      .waitForElementByName('Morris')
+      .elementByName('Morris')
         .click()
-        //assertions
 
+        //ASSERTIONS
         
       // select a target & assertions
-      .elementByName('Cassidy Heath')
+      
+      .waitForElementById('dispoVoterRowParent')
+      .elementById('com.i360.i360Walk:id/dispoVoterRowParent')
         .click()
-        //assertions
+
+        //ASSERTIONS
 
       // take survey
+      
+      .waitForElementByName('Take Survey')
       .elementByName('Take Survey')
+        .click()
 
+        //ASSERTIONS
 
-      done();
+      .waitForElementByName('Answer 1')
+      .elementByName('Answer 1')
+        .click()
+      .elementByName('Next')
+        .click()
+      .waitForElementByName('Finished with Household')
+      .elementByName('Finished with Household')
+        .click()
   });
-
 });
