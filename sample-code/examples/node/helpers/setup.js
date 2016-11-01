@@ -1,10 +1,10 @@
 var wd = require("wd");
 
 require('colors');
-var chai 								= require("chai");
-var chaiAsPromised 						= require("chai-as-promised");
-var should 								= chai.should();
-chaiAsPromised.transferPromiseness 		= wd.transferPromiseness;
+var chai 							= require("chai");
+var chaiAsPromised 					= require("chai-as-promised");
+var should 							= chai.should();
+chaiAsPromised.transferPromiseness 	= wd.transferPromiseness;
 chai.use(chaiAsPromised);				
 
 if (process.env.npm_package_config_sauce) {

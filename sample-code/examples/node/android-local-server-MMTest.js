@@ -7,13 +7,16 @@ var assert = require('assert');
 var serverConfigs = require('./helpers/appium-servers');
 // var args = process.args.slice(2);
 // var config = require('./helpers/config')
-// var actions = require('/helpers/actions')
-//var elements = require('/helpers/elements')
+// var actions = require('./helpers/actions.')
+var elements = require('./helpers/elements')
 var desired;
 var simulator = false
 var  _ = require('underscore');
 var    localServer = require('./helpers/local-server');
 // wd.addPromiseChainMethod('swipe', actions.swipe);
+var chai = require("chai");
+chai.config.includeStack = true;
+var assert = chai.assert;
 
 
 describe("android local server", function () {
@@ -56,12 +59,14 @@ describe("android local server", function () {
 
   it("should open the app", function () {
     return driver
-      .elementById('com.i360.i360Walk:id/etLoginUsername')
-        .sendKeys('test_1654wseward')
-      .elementById('com.i360.i360Walk:id/etPassword')
-        .sendKeys('asdf')
-      .elementById('com.i360.i360Walk:id/btnLogin')
+      .elementById(elements.loginScreen.rememberMe)
         .click()
+      .elementById(elements.loginScreen.userName)
+        .sendKeys('test_1654wseward')
+      .elementById(elements.loginScreen.password)
+        .sendKeys('asdf')
+      .elementById(elements.loginScreen.logIn)
+        .click().sleep(1000)
       .waitForElementByName('Walkbooks');
   });
 
