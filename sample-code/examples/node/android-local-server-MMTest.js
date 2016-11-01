@@ -60,14 +60,14 @@ describe("android local server", function () {
   it("should open the app", function () {
     return driver
       .elementById(elements.loginScreen.rememberMe)
-        .click()
+        .click().sleep(500)
       .elementById(elements.loginScreen.userName)
         .sendKeys('test_1654wseward')
       .elementById(elements.loginScreen.password)
         .sendKeys('asdf')
       .elementById(elements.loginScreen.logIn)
-        .click().sleep(1000)
-      .waitForElementByName('Walkbooks');
+        .click().sleep(2000)
+      .waitForElementById(elements.homeScreen.Walkbooks, 2000);
   });
 
   it("should open Walkbooks and Preview the Survey", function() {
@@ -75,7 +75,7 @@ describe("android local server", function () {
     return driver
       .elementByName('Walkbooks')
         .click().sleep(1000)
-      .waitForElementByName('and another one')
+      .waitForElementByName('and another one', 2000)
       .elementByName('and another one')
         .click()
 
@@ -98,20 +98,20 @@ describe("android local server", function () {
       .back()
       .elementByName('Start')
         .click()
-      .waitForElementByName('Select Walkbook')
+      .waitForElementByName('Select Walkbook', 2000)
       .elementByXPath("//android.widget.TextView[@text='List']")
         .click()
-      .waitForElementByName('Walkbook 28')
+      .waitForElementByName('Walkbook 28', 2000)
       .elementByName('Walkbook 28')
-        .click()
-      .waitForElementByName('Houses in Walkbook 28')
+        .click().sleep(1000)
+      .waitForElementByName('Houses in Walkbook 28', 2000)
       .elementByXPath("//android.widget.TextView[@text='List']")
         .click()
 
       // Select a house & assertions
       
-      .waitForElementByName('Morris')
-      .elementByName('Morris')
+      .waitForElementByName('Keene')
+      .elementByName('Keene')
         .click()
 
         //ASSERTIONS
@@ -126,18 +126,18 @@ describe("android local server", function () {
 
       // take survey
       
-      .waitForElementByName('Take Survey')
+      waitForElwmentById( 'Take Survey', 2000 )
       .elementByName('Take Survey')
         .click()
 
         //ASSERTIONS
 
-      .waitForElementByName('Answer 1')
+      .waitForElementByName('Answer 1', 2000)
       .elementByName('Answer 1')
         .click()
       .elementByName('Next')
         .click()
-      .waitForElementByName('Finished with Household')
+      .waitForElementById('Finished with Household', 2000)
       .elementByName('Finished with Household')
         .click()
   });
