@@ -11,8 +11,11 @@
 	}
 
 	exports.homeScreen = {
-		'Walkbooks'		 : 'com.i360.i360Walk:id/btnWalkbooks',
-		'Voter Lookup'   : 'com.i360.i360Walk:id/btnVoterLookup',
-		'Voter Check-In' : 'com.i360.i360Walk:id/btnVoterCheckIn',
-		'Event Check-In' : 'com.i360.i360Walk:id/btnEventCheckIn'
+		'walkbooks'		 : 'com.i360.i360Walk:id/btnWalkbooks',
+		'voterLookup'    : 'com.i360.i360Walk:id/btnVoterLookup',
+		'voterCheckIn'   : 'com.i360.i360Walk:id/btnVoterCheckIn',
+		'eventCheckIn'   : 'com.i360.i360Walk:id/btnEventCheckIn'
+		'signOut'        : 'com.i360.i360Walk:id/btnSignOut'
 	}
+
+

@@ -124,9 +124,10 @@ describe("android local server", function () {
 
         //ASSERTIONS
 
+
       // take survey
       
-      waitForElwmentById( 'Take Survey', 2000 )
+      .waitForElementById( 'Take Survey', 2000 )
       .elementByName('Take Survey')
         .click()
 
