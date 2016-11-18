@@ -6,13 +6,13 @@ var elements  = require('./helpers/elements')
 var simulator = false
 var chai      = require("chai");
 var assert    = chai.assert;
+// var assert  = require('assert'); //needed?
 var config  = require('./helpers/config')
 chai.config.includeStack = true;
 var commons = require('./helpers/commons').Commons;
 var commonMethods = new commons();
 // var actions = require('./helpers/actions')
 // wd.addPromiseChainMethod('swipe', actions.swipe);
-// var assert  = require('assert'); //needed?
 
 
 describe("android local server", function () {

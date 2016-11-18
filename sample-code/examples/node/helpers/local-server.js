@@ -21,7 +21,7 @@ app.get('/ApiDemos-debug.apk', function (req, res) {
 var server;
 
 exports.start = function () {
-    server = app.listen(1500);
+    server = app.listen(3000);
 };
 
 exports.stop = function () {

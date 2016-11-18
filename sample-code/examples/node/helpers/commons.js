@@ -40,7 +40,7 @@ Commons.prototype.afterAll = function() {
 	context.config 	= config;				// had to add; question: is there a reason these have to be here?  Can they be above?
 	var driver = config.driver;
 	after(function () {
-	  localServer.stop();
+	  localServer.stop(); //question: what does this do?  Not present in some examples.  Is it redundant with driver.quit()?
 	  return driver
 	  .quit()
 	  .finally(function () {

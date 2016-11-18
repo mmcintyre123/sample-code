@@ -2,32 +2,24 @@
 
 require("./helpers/setup");
 
-var wd            = require("wd");
-var actions       = require('./helpers/actions');
-var _p            = require('./helpers/promise-utils');  // needed?
-var Q             = require('q'); // needed?
-
-var WdAndroid = require('wd-android'); // new
-var wdAndroid = new WdAndroid(wd); // new
-
+// var actions  =  require('./helpers/actions');
+// var _p       =  require('./helpers/promise-utils');  // needed?
+// var Q        =  require('q'); // needed?
+// var wd       =  require("wd"); // - move to config?
+// var args     =  process.args.slice(2);
 // wd.addPromiseChainMethod('swipe', actions.swipe);
-// var args = process.args.slice(2);
 
-var elements = require('./helpers/elements')
-var simulator = false
-var chai = require("chai");
-var assert = chai.assert;
-// var assert = require('assert');
-var config = require('./helpers/config')
-chai.config.includeStack = true;
-var commons = require('./helpers/commons').Commons;
-var commonMethods = new commons();
+var elements             =  require('./helpers/elements')
+var simulator            =  false
+var chai                 =  require("chai");
+var assert               =  chai.assert;
+// var assert            =  require('assert');
+var config               =  require('./helpers/config')
+chai.config.includeStack =  true;
+var commons              =  require('./helpers/commons').Commons;  // new
+var commonMethods        =  new commons();  // new
 
-
-// var desired;
-// var localServer = require('./helpers/local-server');
-
-
+console.log('line 22')
 
 describe("android local server", function () {
 
@@ -42,7 +34,7 @@ describe("android local server", function () {
 
   it("is a sandbox. Commence testing!", function () {
     var walkbookID = elements.homeScreen.walkbooks.split(/\//).splice(1,1).toString()
-    return driver
+    return config.driver
       //login
       .elementById(elements.loginScreen.rememberMe)
         .click()
@@ -59,9 +51,13 @@ describe("android local server", function () {
       .elementById(elements.homeScreen.walkbooks)
         .click().sleep(1000)
 
+
+//******** LEFT OFF HERE *************//
+
       // Select the first survey
 
-      .linearLayoutElement('0').click();
+      .elementById('com.i360.i360Walk:id/lvQuestions')
+      .linearLayoutElement('6').click();
 
       // .frameLayoutChildren('com.i360.i360Walk:id/Body')
       // .then(function(els){
@@ -72,28 +68,25 @@ describe("android local server", function () {
       // .elementByXPath('//android.widget.LinearLayout[@index(0)]')
       //   .click()
     });
-
-
-
-
-
-
+/*
 
   it('should try clicking the first survey', function () {
     var walkbookID = elements.homeScreen.walkbooks.split(/\//).splice(1,1).toString()
-    return driver
+    return config.driver
       .waitForElementById(walkbookID, 3000)
-      .linearLayoutChildren('')
+      // .then(function () {console.log('before here we go'); return this;})
+      .linearLayoutChildren('1')
+      // .then(function () {console.log('after here we go'); return this;})
       .then(function(els) {
           return els[1].click();
       });
     });
 
-
+*/
 
 //    it('should try some things on the Walkbooks page', function () {
 //        // should press the logout menu button
-//        return driver
+//        return config.driver
 //  
 //      /*  
 //        .elementById('android:id/action_bar')
@@ -123,7 +116,7 @@ describe("android local server", function () {
 //  
 //    it('should click on the first survey', function () {
 //      var walkbookID = elements.homeScreen.walkbooks.split(/\//).splice(1,1).toString()
-//      return driver
+//      return config.driver
 //      .sleep(2000)
 //      //login
 //      .elementById(elements.loginScreen.rememberMe)
