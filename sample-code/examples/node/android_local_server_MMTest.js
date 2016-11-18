@@ -33,7 +33,9 @@ describe("android local server", function () {
     var desired = process.env.npm_package_config_sauce ?
       _.clone(require("./helpers/caps").android18) :
       _.clone(require("./helpers/caps").android19);
+    
     desired.app = require("./helpers/apps").i360Walk;
+
     if (process.env.npm_package_config_sauce) {
       desired.name = 'android - local server';
       desired.tags = ['sample'];
@@ -66,8 +68,9 @@ describe("android local server", function () {
       .elementById(elements.loginScreen.password)
         .sendKeys('asdf')
       .elementById(elements.loginScreen.logIn)
-        .click().sleep(2000)
-      .waitForElementById(elements.homeScreen.Walkbooks, 2000);
+        .click()
+      var walkbookID = elements.homeScreen.walkbooks.split(/\//).splice(1,1)
+      .waitForElementById(walkbookID, 3000);
   });
 
   it("should open Walkbooks and Preview the Survey", function() {
@@ -127,7 +130,7 @@ describe("android local server", function () {
 
       // take survey
       
-      .waitForElementById( 'Take Survey', 2000 )
+      .waitForElementById('btnTakeSurvey', 2000 )
       .elementByName('Take Survey')
         .click()
 
