@@ -18,14 +18,14 @@ var config               =  require('./helpers/config')
 chai.config.includeStack =  true;
 var commons              =  require('./helpers/commons').Commons;  // new
 var commonMethods        =  new commons();  // new
-
-console.log('line 22')
+var pry                  =  require('pryjs')
 
 describe("android local server", function () {
 
 // Set up stuff
 
-  this.timeout(30000);
+  // this.timeout(30000); // use this for testing
+  this.timeout(33333333); // use this for debugging
   commonMethods.beforeAll();
   commonMethods.afterAll();
   commonMethods.afterEach();
@@ -34,6 +34,8 @@ describe("android local server", function () {
 
   it("is a sandbox. Commence testing!", function () {
     var walkbookID = elements.homeScreen.walkbooks.split(/\//).splice(1,1).toString()
+    var a = config.driver
+
     return config.driver
       //login
       .elementById(elements.loginScreen.rememberMe)
@@ -43,13 +45,14 @@ describe("android local server", function () {
       .elementById(elements.loginScreen.password)
         .sendKeys('asdf')
       .elementById(elements.loginScreen.logIn)
-        .click()
+        .click().sleep(1000)
       // .waitForElementById('btnWalkbooks', 3000) // works
       .waitForElementById(walkbookID, 3000)
 
       // Open Walkbooks - Survey List
       .elementById(elements.homeScreen.walkbooks)
         .click().sleep(1000)
+      // .then(function () {global.a = this; repl.start('> ').context.m = this; debugger; return this;})
 
 
 //******** LEFT OFF HERE *************//
@@ -57,7 +60,9 @@ describe("android local server", function () {
       // Select the first survey
 
       .elementById('com.i360.i360Walk:id/lvQuestions')
-      .linearLayoutElement('6').click();
+      .linearLayoutElement('6').click()
+
+      
 
       // .frameLayoutChildren('com.i360.i360Walk:id/Body')
       // .then(function(els){

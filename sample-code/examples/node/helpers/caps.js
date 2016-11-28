@@ -31,6 +31,7 @@ exports.android19 = {
   platformName: 'Android',
   platformVersion: '4.4.2',
   deviceName: 'Android Emulator',
+  newCommandTimeout: 999, // Default is 60 - 999 for testing.  Script will (more importantly) still stop after the this.timeout configured in each test.
   app: undefined // will be set later
 };
 
