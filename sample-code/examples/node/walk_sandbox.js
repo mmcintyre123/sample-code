@@ -25,7 +25,7 @@ describe("android local server", function () {
 // Set up stuff
 
   // this.timeout(30000); // use this for testing
-  this.timeout(33333333); // use this for debugging
+  this.timeout(33333333); // use this for debugging with pry
   commonMethods.beforeAll();
   commonMethods.afterAll();
   commonMethods.afterEach();
@@ -45,21 +45,75 @@ describe("android local server", function () {
       .elementById(elements.loginScreen.password)
         .sendKeys('asdf')
       .elementById(elements.loginScreen.logIn)
-        .click().sleep(1000)
+        .click()
       // .waitForElementById('btnWalkbooks', 3000) // works
-      .waitForElementById(walkbookID, 3000)
+      .waitForElementById(walkbookID, 5000)
 
       // Open Walkbooks - Survey List
       .elementById(elements.homeScreen.walkbooks)
         .click().sleep(1000)
-      // .then(function () {global.a = this; repl.start('> ').context.m = this; debugger; return this;})
+      // .elementById('com.i360.i360Walk:id/lvQuestions')
+
+      // .then(function () {eval(pry.it); return this;})
+      //     .elementByXPath('//android.widget.LinearLayout[@index="0"]').click()
+
+      // .then(function () {eval(pry.it); return this;})
+      //     .elementsByXPath('//android.widget.LinearLayout[contains(@index, "0")]').click()
+
+      // .then(function () {eval(pry.it); return this;})
+      //     .elementByXPath('//android.widget.FrameLayout[0]/android.view.ViewGroup[0]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[0]/android.widget.FrameLayout[0]/android.widget.RelativeLayout[0]/android.widget.ListView[0]/android.widget.LinearLayout[@index = 0]')
+      //       .click()
+
+      .then(function () {debugger; return this;})
+      // .then(function () {eval(pry.it); return this;})
+      .then(function (result) {
+          try {
+            return config.driver
+            .elementByXPath('//android.widget.FrameLayout[0]/android.view.ViewGroup[0]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[0]/android.widget.FrameLayout[0]/android.widget.RelativeLayout[0]/android.widget.ListView[0]/android.widget.LinearLayout[@index = \'0\']')
+          } catch (error) {
+              done(new Error('Test failed.  Moving on.'));
+          }
+        })
+
+      .then(function () {debugger; return this;})
+      // .then(function () {eval(pry.it); return this;})
+      return config.driver
+        .then(function () {
+          try {
+          return config.driver
+          .elementById(elements.homeScreen.walkbooks)
+            .click().sleep(1000)
+          .elementByXPath("//android.widget.LinearLayout[@index='0']/android.widget.TextView[@index='0']")
+          } catch (error) {}
+        })
+
+      .then(function () {debugger; return this;})
+      // .then(function () {eval(pry.it); return this;})
+          .elementById(elements.homeScreen.walkbooks)
+            .click().sleep(1000)
+          var surveys = config.driver.elementsById('com.i360.i360Walk:id/lvQuestions')
+
+
+
+
+
+
+// By.xpath("//*[@class='android.widget.ImageView'][@NAF='true']");
+
+
+.elementById('android:id/content')
+.elementById('com.i360.i360Walk:id/Body')
+.elementById('com.i360.i360Walk:id/RelativeBody')
+.elementById('com.i360.i360Walk:id/lvQuestions')
+
+
 
 
 //******** LEFT OFF HERE *************//
 
       // Select the first survey
 
-      .elementById('com.i360.i360Walk:id/lvQuestions')
+      .elementsById('com.i360.i360Walk:id/lvQuestions')
       .linearLayoutElement('6').click()
 
       
