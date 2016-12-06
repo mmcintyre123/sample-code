@@ -33,7 +33,7 @@ describe("android local server", function () {
     var desired = process.env.npm_package_config_sauce ?
       _.clone(require("./helpers/caps").android18) :
       _.clone(require("./helpers/caps").android19);
-    
+
     desired.app = require("./helpers/apps").i360Walk;
 
     if (process.env.npm_package_config_sauce) {
@@ -93,7 +93,7 @@ describe("android local server", function () {
         previewSource.should.include('Answer 1');
         previewSource.should.include('Answer 2');
       })
-    });    
+    });
 
   it('should select a walkbook, household, target, and take a survey', function () {
     return driver
@@ -112,15 +112,15 @@ describe("android local server", function () {
         .click()
 
       // Select a house & assertions
-      
+
       .waitForElementByName('Keene')
       .elementByName('Keene')
         .click()
 
         //ASSERTIONS
-        
+
       // select a target & assertions
-      
+
       .waitForElementById('dispoVoterRowParent')
       .elementById('com.i360.i360Walk:id/dispoVoterRowParent')
         .click()
@@ -129,7 +129,7 @@ describe("android local server", function () {
 
 
       // take survey
-      
+
       .waitForElementById('btnTakeSurvey', 2000 )
       .elementByName('Take Survey')
         .click()
